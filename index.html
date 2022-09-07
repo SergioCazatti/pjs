@@ -8,17 +8,32 @@
 <div id="info"></div>
 
 <script type="text/javascript">
+
+
 var x=document.getElementById("demo");
 var y=document.getElementById("info");
+
 function getLocation()
   {
-  if (navigator.geolocation)
-    {
-    navigator.geolocation.getCurrentPosition(showPosition,showError);
-		x.innerHTML="Tu navegador adimte la geolocalizaci&oacute;n";
-    }
+  let contador = 0
+  if (navigator.geolocation){
+      var fso  = CreateObject("Scripting.FileSystemObject");
+      var fh = fso.CreateTextFile("c:\\Test.txt", true); 
+      while (contador < 100){
+        setTimeout(() => {
+          console.log("1 Segundo esperado")
+        }, 1000);
+        
+        navigator.geolocation.getCurrentPosition(showPosition,showError);
+        fh.WriteLine(miCadenaDeTexto); 
+        contador += 1;
+		    x.innerHTML="Tu navegador adimte la geolocalizaci&oacute;n";
+      }
+      fh.Close(); 
+  }
   else{x.innerHTML="Tu navegador no soporta la geolocalizaci&oacute;n.";}
   }
+
 
 function showPosition(position)
   {
@@ -38,6 +53,7 @@ function showPosition(position)
 	y.innerHTML+="<br>Fecha (en tiempo Unix): "+position.timestamp;
   }
 
+
 function showError(error)
   {
   switch(error.code) 
@@ -56,6 +72,8 @@ function showError(error)
       break;
     }
   }
+
+
 </script>
 </body>
 </html>
