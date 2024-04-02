@@ -2,7 +2,7 @@
 async function startCamera() {
     try {
         const constraints = {
-            video: true, { facingMode: 'environment' } // 'environment' para la cámara trasera
+            video: { facingMode: 'environment' } // 'environment' para la cámara trasera
         };    
         const stream = await navigator.mediaDevices.getUserMedia(constraints);
         const video = document.createElement('video');
